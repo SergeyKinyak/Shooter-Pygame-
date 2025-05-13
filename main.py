@@ -1,37 +1,29 @@
-import random
-
 import pygame
 import sys
 
 pygame.init()
+
+STEP = 20
+screen_fill_color = (32, 32, 42)
 screen_width, screen_height = 800, 600
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("My pygame")
 
-fill_color = (32, 52, 72)
-rect_color = pygame.Color('darkgreen')
-rect_width, rect_height = 100, 200
-rect_x = screen_width / 2 - rect_width / 2
-rect_y = screen_height / 2 - rect_height / 2
+pygame.display.set_caption("Shotter game")
 
-STEP = 10
+fighter_image = pygame.image.load('images/fighter.png')
+fighter_width, fighter_height = fighter_image.get_size()
+
+fighter_x, fighter_y = screen_width / 2 - fighter_width / 2, screen_height - fighter_height
 while True:
     for event in pygame.event.get():
-
-        print(event)
         if event.type == pygame.QUIT:
             sys.exit()
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP and rect_y >= STEP:
-                rect_y -= STEP
-            if event.key == pygame.K_DOWN and rect_y <= screen_height - rect_height - STEP:
-                rect_y += STEP
-            if event.key == pygame.K_LEFT and rect_x >= STEP:
-                rect_x -= STEP
-            if event.key == pygame.K_RIGHT and rect_x <= screen_width - rect_width - STEP:
-                rect_x += STEP
+            if event.key == pygame.K_LEFT and fighter_x >= STEP:
+                fighter_x -= STEP
+            if event.key == pygame.K_RIGHT and fighter_x <= screen_width - fighter_width - STEP:
+                fighter_x += STEP
+    screen.fill(screen_fill_color)
+    screen.blit(fighter_image, (fighter_x, fighter_y))
 
-
-    screen.fill(fill_color)
-    pygame.draw.rect(screen, rect_color, [rect_x, rect_y, rect_width, rect_height])
     pygame.display.update()
