@@ -2,7 +2,7 @@ import pygame
 from constants import BALL_STEP,SCREEN_WIDTH,SCREEN_HEIGHT
 
 class Ball:
-    def __init__(self):
+    def __init__(self,fighter):
         self.image = pygame.image.load('images/rocket.png')
         self.width, self.height = self.image.get_size()
         self.step = BALL_STEP
